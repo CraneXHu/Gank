@@ -58,13 +58,6 @@ public class SearchResultActivity extends AppCompatActivity {
         handleIntent(getIntent());
     }
 
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-
-        handleIntent(intent);
-    }
-
     private void initView(){
         recyclerView = (RecyclerView) findViewById(R.id.search_rv);
         adapter = new GankRecyclerViewAdapter(this, resultList);
@@ -75,31 +68,28 @@ public class SearchResultActivity extends AppCompatActivity {
     }
 
     private void handleIntent(Intent intent){
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())){
-            query = intent.getStringExtra(SearchManager.QUERY);
-            Bundle appData = intent.getBundleExtra(SearchManager.APP_DATA);
-            type = appData.getString("type");
 
-            GankRetrofit.getInstance().gankApi().getSearchData(query, type, 1)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Subscriber<Gank>() {
-                        @Override
-                        public void onCompleted() {
+        query = intent.getStringExtra("query");
+        type = intent.getStringExtra("type");
+        GankRetrofit.getInstance().gankApi().getSearchData(query, type, 1)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Gank>() {
+                    @Override
+                    public void onCompleted() {
 
-                        }
+                    }
 
-                        @Override
-                        public void onError(Throwable e) {
-                            e.printStackTrace();
-                        }
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
 
-                        @Override
-                        public void onNext(Gank gank) {
-                            resultList.addAll(gank.getResults());
-                            adapter.notifyDataSetChanged();
-                        }
-                    });
-        }
+                    @Override
+                    public void onNext(Gank gank) {
+                        resultList.addAll(gank.getResults());
+                        adapter.notifyDataSetChanged();
+                    }
+                });
     }
 }

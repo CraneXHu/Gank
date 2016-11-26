@@ -2,6 +2,7 @@ package me.pkhope.gank.activity;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
@@ -93,10 +94,11 @@ public class MainActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-//                Bundle appDataBundle = new Bundle();
-//                appDataBundle.putString("type", titleList.get(viewPager.getCurrentItem()));
-//                startSearch(query, true, appDataBundle, false);
-                return false;
+                Intent intent = new Intent(MainActivity.this, SearchResultActivity.class);
+                intent.putExtra("query", query);
+                intent.putExtra("type", titleList.get(viewPager.getCurrentItem()));
+                startActivity(intent);
+                return true;
             }
 
             @Override
