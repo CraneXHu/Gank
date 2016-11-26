@@ -14,4 +14,7 @@ public interface GankApi {
 
     @GET("data/{type}/" + 10 + "/{page}")
     Observable<Gank> getGankData(@Path("type") String type, @Path("page") int page);
+
+    @GET("search/query/{query}/category/{type}/count/" + 10 + "/page/{page}")
+    Observable<Gank> getSearchData(@Path("query") String query, @Path("type") String type, @Path("page") int page);
 }

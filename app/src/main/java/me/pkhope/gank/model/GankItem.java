@@ -1,5 +1,8 @@
 package me.pkhope.gank.model;
 
+import com.litesuits.orm.db.annotation.PrimaryKey;
+import com.litesuits.orm.db.annotation.Table;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,8 +12,11 @@ import java.util.List;
  * Created by pkhope on 16/11/24.
  */
 
+@Table("gank_item")
 public class GankItem implements Serializable{
 
+    @PrimaryKey(PrimaryKey.AssignType.AUTO_INCREMENT)
+    public long id;
     public String _id;
     public Date createdAt;
     public String desc;
@@ -21,6 +27,14 @@ public class GankItem implements Serializable{
     public String url;
     public boolean used;
     public String who;
+
+    public void setId(long id){
+        this.id = id;
+    }
+
+    public long getId(){
+        return id;
+    }
 
     public void set_id(String id){
         _id = id;

@@ -3,4 +3,11 @@
     <color name="colorPrimary">#4D6992</color>
     <color name="colorPrimaryDark">#375683</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="refresh_progress_1">#e91e63</color>
+    <color name="refresh_progress_2">#00b0ff</color>
+    <color name="refresh_progress_3">#432e2a</color>
+    
+    <color name="indicator">#FFFF8C</color>
+    <color name="tab_text">#D8D8D8</color>
 </resources>

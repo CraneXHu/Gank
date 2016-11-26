@@ -28,15 +28,9 @@ public class GankRetrofit {
 
     private GankRetrofit(){
 
-//        Gson gson = new GsonBuilder()
-//                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-//                .serializeNulls()
-//                .create();
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(HOST)
-//                .addConverterFactory(GsonConverterFactory.create(gson))
-                .addConverterFactory(new MyConverterFactory())
+                .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
 
