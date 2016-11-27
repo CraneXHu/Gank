@@ -18,13 +18,7 @@
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
-
-    <ProgressBar
-        android:id="@+id/progressbar"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        style="?android:attr/progressBarStyleHorizontal"/>
-
+    
     <WebView
         android:id="@+id/webview"
         android:layout_width="match_parent"

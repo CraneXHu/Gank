@@ -6,9 +6,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 import me.pkhope.gank.R;
 
@@ -47,13 +49,21 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void initWebView(){
+        final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressbar);
         final WebView webView = (WebView) findViewById(R.id.webview);
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.setWebViewClient(new WebViewClient(){
+        webView.setWebChromeClient(new WebChromeClient(){
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                webView.loadUrl(request.toString());
-                return true;
+            public void onProgressChanged(WebView view, int newProgress) {
+                if (newProgress == 100){
+                    progressBar.setVisibility(View.GONE);
+                } else {
+                    if (progressBar.getVisibility() == View.GONE){
+                        progressBar.setVisibility(View.VISIBLE);
+                    }
+                    progressBar.setProgress(newProgress);
+                }
+                super.onProgressChanged(view, newProgress);
             }
         });
         webView.loadUrl(url);
